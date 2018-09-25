@@ -2,19 +2,35 @@ const bookGet = require('../lib/mysql')
 
 module.exports = async (ctx, next) => {
   // 获取get，url传递过来的数据
-  const { id } = ctx.request.query
-  await bookGet
-    .findAllComments(id)
-    .then(res => {
-      res.map(v => {
-        v['createTime'] = timestampToTime(v['createTime'])
+  const { bookid, appid } = ctx.request.query
+
+  if (bookid) {
+    await bookGet
+      .findAllComments(bookid)
+      .then(res => {
+        res.map(v => {
+          v['createTime'] = timestampToTime(v['createTime'])
+        })
+        ctx.body = { code: 0, msg: '成功', data: res }
       })
-      ctx.body = { code: 0, msg: '成功', data: res }
-    })
-    .catch(err => {
-      console.log(err)
-      ctx.body = { code: -1, msg: '失败' }
-    })
+      .catch(err => {
+        console.log(err)
+        ctx.body = { code: -1, msg: '失败' }
+      })
+  } else if (appid) {
+    await bookGet
+      .findMyComments(appid)
+      .then(res => {
+        res.map(v => {
+          v['createTime'] = timestampToTime(v['createTime'])
+        })
+        ctx.body = { code: 0, msg: '成功', data: res }
+      })
+      .catch(err => {
+        console.log(err)
+        ctx.body = { code: -1, msg: '失败' }
+      })
+  }
 }
 
 function timestampToTime (timestamp) {

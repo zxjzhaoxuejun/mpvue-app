@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="comm-list" v-for="comm in comments" :key="comm.cid">
+  <div class="comm-list" v-for="comm in comments" :key="comm.cid" @click="handleClick(comm.bookid)">
     <div class="user-con">
       <div class="left-info">
         <img :src="comm.avatarUrl||img" alt="用户头像" class="t-pic" mode="aspectFit" />
@@ -28,11 +28,24 @@ export default {
     comments: {
       type: [Object],
       default: ''
+    },
+    modeType: {
+      type: [String],
+      default: ''
     }
   },
-  data () {
+  data() {
     return {
       img: '../../static/img/unlogin.png'
+    }
+  },
+  methods: {
+    handleClick(item) {
+      if (this.modeType === 'user') {
+        wx.navigateTo({
+          url: '/pages/detail/main?id=' + item
+        })
+      }
     }
   }
 }

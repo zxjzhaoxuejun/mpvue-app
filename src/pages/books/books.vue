@@ -20,7 +20,7 @@ export default {
   // 没有更多数据
   // page=1,
 
-  data () {
+  data() {
     return {
       books: [],
       page: 1,
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     // init初始化时只加载第一页
-    async getBookList (init) {
+    async getBookList(init) {
       if (init) {
         this.page = 1
         this.more = true
@@ -59,23 +59,23 @@ export default {
 
       wx.hideNavigationBarLoading()
     },
-    async getHots () {
+    async getHots() {
       const hots = await get('/weapp/bookhots')
       this.hots = hots.data
     }
   },
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     this.getBookList(true)
     this.getHots()
     console.log('下拉')
   },
-  onReachBottom () {
+  onReachBottom() {
     // 底部刷新
     console.log('底部刷新')
     this.page = this.page + 1
     this.getBookList()
   },
-  mounted () {
+  onShow() {
     this.getBookList(true)
     this.getHots()
   }

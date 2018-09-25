@@ -106,6 +106,12 @@ let findAllBooks = () => {
   return query(_sql)
 }
 
+// 查询我添加的所有图书
+let findMyBooks = appid => {
+  let _sql = `select * from books,user_info where books.appid=user_info.appid and books.appid="${appid}" order by id desc;`
+  return query(_sql)
+}
+
 // 查询所有评论
 let findAllComments = bookid => {
   let _sql = `select * from comments,user_info where comments.appid=user_info.appid and bookid=${bookid} order by cid desc;`
@@ -114,7 +120,7 @@ let findAllComments = bookid => {
 
 // 查询我的评论
 let findMyComments = appid => {
-  let _sql = `select * from comments,user_info where comments.appid=user_info.appid and appid=${appid} order by cid desc;`
+  let _sql = `select * from comments,user_info where comments.appid=user_info.appid and comments.appid="${appid}" order by cid desc;`
   return query(_sql)
 }
 
@@ -173,5 +179,6 @@ module.exports = {
   findDetail,
   insertComments,
   findAllComments,
-  findMyComments
+  findMyComments,
+  findMyBooks
 }

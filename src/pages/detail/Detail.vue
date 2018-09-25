@@ -30,7 +30,7 @@ import { get, showModal, post } from '@/utils/utils'
 import BookInfo from '@/components/BookInfo'
 import CommentList from '@/components/CommentList'
 export default {
-  data () {
+  data() {
     return {
       bookId: '',
       bookInfo: '',
@@ -47,7 +47,7 @@ export default {
     CommentList
   },
   computed: {
-    showAdd () {
+    showAdd() {
       if (!this.appid) {
         // 未登录
         this.footerInfo = '未登录不能评论...'
@@ -62,7 +62,7 @@ export default {
     }
   },
   methods: {
-    async addComment () {
+    async addComment() {
       // 评论表字段，书本id,用户appid，手机型号，地理位置，评论内容，评论时间
       let data = {
         bookid: this.bookId,
@@ -81,7 +81,7 @@ export default {
         showModal('评论提示', '请先输入评论...')
       }
     },
-    async getDetail () {
+    async getDetail() {
       const info = await get('/weapp/bookdetail', { id: this.bookId })
       console.log(info.data)
       wx.setNavigationBarTitle({
@@ -89,15 +89,15 @@ export default {
       })
       this.bookInfo = info.data
     },
-    async getComments () {
+    async getComments() {
       const commentList = await get('/weapp/commentlist', {
-        id: this.bookId
+        bookid: this.bookId
       })
       this.comments = commentList.data
       console.log(commentList)
     },
     // 获取手机型号
-    getPhone (e) {
+    getPhone(e) {
       if (e.target.value) {
         const phoneInfo = wx.getSystemInfoSync()
         console.log(phoneInfo)
@@ -107,7 +107,7 @@ export default {
       }
     },
     // 获取地理位置
-    getLocation (e) {
+    getLocation(e) {
       const ak = 'zNXXG8Wjglx0boZYIZIrBHZuCPUzDTtT'
       const url = 'https://api.map.baidu.com/geocoder/v2/'
       // http://api.map.baidu.com/geocoder/v2/?callback=renderReverse&location=35.658651,139.745415&output=json&pois=1&ak=您的ak //GET请求
@@ -140,7 +140,7 @@ export default {
       }
     }
   },
-  mounted () {
+  mounted() {
     this.bookId = this.$root.$mp.query.id
     this.getDetail()
     this.appid = wx.getStorageSync('appInfoData').openid
