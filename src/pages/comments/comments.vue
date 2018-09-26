@@ -40,13 +40,13 @@ export default {
       wx.hideNavigationBarLoading()
     },
     async getMyComment() {
-      const comments = await get('/weapp/commentlist', {
+      const comments = await get('/mpvue/commentlist', {
         appid: this.appid
       })
       this.comments = comments.data
     },
     async getMyBook() {
-      const book = await get('/weapp/booklist', { appid: this.appid })
+      const book = await get('/mpvue/booklist', { appid: this.appid })
       this.books = book.data
     }
   },

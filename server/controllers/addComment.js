@@ -15,5 +15,7 @@ module.exports = async (ctx, next) => {
       .catch(err => {
         ctx.body = { code: -1, data: { msg: '评论失败:' + err } }
       })
+  } else {
+    ctx.body = { code: -1, data: { msg: '参数错误' } }
   }
 }

@@ -21,7 +21,7 @@
 import YearProgress from '@/components/YearProgress'
 import { post, showModal, outsideReq } from '@/utils/utils'
 export default {
-  data () {
+  data() {
     return {
       userInfo: {
         avatarUrl: '../../static/img/unlogin.png',
@@ -34,13 +34,13 @@ export default {
   components: {
     YearProgress
   },
-  mounted () {
+  mounted() {
     let self = this
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
               wx.setStorageSync('loginInfo', res.userInfo)
               // 用户已经授权过
               self.showModel = false
@@ -59,7 +59,7 @@ export default {
     })
     wx.login({
       // 获取code
-      success: async function (res) {
+      success: async function(res) {
         const appInfo = await outsideReq(
           `https://xyy51.cn/login.php?code=${res.code}`,
           'GET'
@@ -73,20 +73,20 @@ export default {
         // const firstLogin = wx.getStorageSync('skey')
         // console.log(firstLogin)
         // if (!firstLogin) {
-        await post('/weapp/user', info)
+        await post('/mpvue/user', info)
         // }
       }
     })
   },
   methods: {
-    async addBook (isnb) {
-      const res = await post('/weapp/addbook', {
+    async addBook(isnb) {
+      const res = await post('/mpvue/addbook', {
         isnb: isnb,
         appid: this.appInfo.openid
       })
       showModal(res.msg, `${res.title}添加成功！`)
     },
-    scanBook () {
+    scanBook() {
       // 允许从相机和相册扫码
       wx.scanCode({
         success: res => {
@@ -98,13 +98,13 @@ export default {
         }
       })
     },
-    login () {
+    login() {
       let self = this
       wx.getSetting({
-        success: function (res) {
+        success: function(res) {
           if (res.authSetting['scope.userInfo']) {
             wx.getUserInfo({
-              success: function (res) {
+              success: function(res) {
                 console.log(res.userInfo)
                 wx.setStorageSync('loginInfo', res.userInfo)
                 // 用户已经授权过
@@ -120,7 +120,7 @@ export default {
       })
     },
     // 获取用户信息新接口
-    agreeGetUser (e) {
+    agreeGetUser(e) {
       // 设置用户信息本地存储
       console.log('click事件首先触发')
       // 判断小程序的API，回调，参数，组件等是否在当前版本可用。  为false 提醒用户升级微信版本
@@ -131,7 +131,7 @@ export default {
         console.log('请升级微信版本')
       }
     },
-    bindGetUserInfo (e) {
+    bindGetUserInfo(e) {
       // console.log(e.mp.detail.rawData)
       if (e.mp.detail.rawData) {
         // 用户按了允许授权按钮
@@ -157,7 +157,7 @@ export default {
       this.showModel = false
     }
   },
-  created () {
+  created() {
     this.userInfo = wx.getStorageSync('loginInfo')
   }
 }

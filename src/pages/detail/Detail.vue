@@ -73,7 +73,7 @@ export default {
       }
       if (this.comment) {
         console.log(data)
-        const res = await post('/weapp/addcomment', data)
+        const res = await post('/mpvue/addcomment', data)
         showModal('评论提示', res.msg)
         this.comment = ''
         this.getComments()
@@ -82,7 +82,7 @@ export default {
       }
     },
     async getDetail() {
-      const info = await get('/weapp/bookdetail', { id: this.bookId })
+      const info = await get('/mpvue/bookdetail', { id: this.bookId })
       console.log(info.data)
       wx.setNavigationBarTitle({
         title: info.data.title
@@ -90,7 +90,7 @@ export default {
       this.bookInfo = info.data
     },
     async getComments() {
-      const commentList = await get('/weapp/commentlist', {
+      const commentList = await get('/mpvue/commentlist', {
         bookid: this.bookId
       })
       this.comments = commentList.data

@@ -41,7 +41,7 @@ export default {
         this.more = true
       }
       wx.showNavigationBarLoading()
-      const book = await get('/weapp/booklist', {
+      const book = await get('/mpvue/booklist', {
         page: this.page,
         size: this.size
       })
@@ -60,7 +60,7 @@ export default {
       wx.hideNavigationBarLoading()
     },
     async getHots() {
-      const hots = await get('/weapp/bookhots')
+      const hots = await get('/mpvue/bookhots')
       this.hots = hots.data
     }
   },

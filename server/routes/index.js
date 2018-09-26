@@ -1,5 +1,5 @@
 const router = require('koa-router')({
-  prefix: '/weapp'
+  prefix: '/mpvue'
 })
 
 const controller = require('../controllers')
