@@ -1,11 +1,14 @@
 <script>
 export default {
-  async created () {}
+  async created() {}
 }
 </script>
 
 <style lang="scss">
 /* this rule will be remove */
+$red: #ea5149;
+$red-hover: #fa5149;
+
 * {
   transition: width 2s;
   -moz-transition: width 2s;
@@ -18,20 +21,20 @@ export default {
   height: 80rpx;
   line-height: 80rpx;
   color: #ffffff;
-  background: #ea5149;
+  background: $red;
   font-size: 32rpx;
 
   &:hover {
-    background: #fa5149;
+    background: $red-hover;
   }
 }
 .red-color {
-  color: #ea5149;
+  color: $red;
 }
 
 .text-footer {
   text-align: center;
-  color: #ea5149;
+  color: $red;
   padding: 28rpx;
   font-size: 30rpx;
   border-top: 1px #fafafa solid;
