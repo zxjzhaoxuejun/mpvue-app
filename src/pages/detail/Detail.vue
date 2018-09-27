@@ -15,7 +15,7 @@
       <span class="red-color">{{phone}}</span>
       <switch color="#ea5149" :checked="phone" class="min-switch" @change="getPhone"/>
     </div>
-    <button class="btn" @click="addComment">提交评论</button>
+    <button class="btn m-t" @click="addComment">提交评论</button>
   </div>
   <div class="text-footer" v-else>
     {{footerInfo}}
@@ -114,8 +114,8 @@ export default {
       if (e.target.value) {
         wx.getLocation({
           // latitude:22.52291longitude:114.05454获取经度纬度
-          success: geo => {
-            wx.request({
+          success: async geo => {
+            await wx.request({
               url,
               data: {
                 ak,
@@ -154,6 +154,9 @@ export default {
     font-size: 32rpx;
   }
 
+  .m-t {
+    margin-top: 20rpx;
+  }
   .commet {
     padding: 0 20rpx;
 
@@ -175,7 +178,7 @@ export default {
       display: flex;
       justify-content: space-between;
       font-size: 30rpx;
-      margin-bottom: 20rpx;
+      margin: 30rpx 0;
 
       .min-switch {
         zoom: 0.7;

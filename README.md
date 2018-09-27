@@ -4,10 +4,15 @@
 
 ## Build Setup
 
-``` bash
+新建项目
+vue init mpvue/mpvue-quickstart my-project
+
+```bash
 # install dependencies
+初始化
 npm install
 
+运行项目
 # serve with hot reload at localhost:8080
 npm run dev
 

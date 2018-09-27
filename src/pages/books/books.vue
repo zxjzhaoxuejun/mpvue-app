@@ -51,6 +51,7 @@ export default {
       }
       if (init) {
         this.books = book.data
+        console.log(book)
         wx.stopPullDownRefresh()
       } else {
         // 底部拉取加载，不能直接覆盖books 而是累加

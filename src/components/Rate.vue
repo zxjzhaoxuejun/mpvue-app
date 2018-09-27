@@ -13,8 +13,8 @@ export default {
     }
   },
   computed: {
-    style () {
-      return `width:${this.rate / 2.4}em`
+    style() {
+      return `width:${this.rate / 2}em`
     }
   }
 }
